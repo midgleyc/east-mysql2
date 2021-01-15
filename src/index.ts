@@ -1,6 +1,6 @@
 import path from 'path'
 import SqlString from 'sqlstring'
-import type {Adapter as AdapterInterface, AdapterConstructorParams} from 'east'
+import type {Adapter as AdapterInterface, AdapterConstructor, AdapterConstructorParams} from 'east'
 import {Connection, createConnection} from 'mysql2/promise'
 
 export interface MySQLParams {
@@ -13,11 +13,15 @@ export interface MySQLParams {
   createDbOnConnect?: boolean
 }
 
-export interface Params extends AdapterConstructorParams<Connection> {
-  mysql: MySQLParams
+export interface Params extends AdapterConstructorParams<MySQLAdapterDb> {
+  mysql?: MySQLParams
 }
 
-export class Adapter implements AdapterInterface<Connection> {
+export interface MySQLAdapterDb {
+  db: Connection
+}
+
+export class Adapter implements AdapterInterface<MySQLAdapterDb> {
   _connection?: Connection
   _params: Params
   _mysqlParams: MySQLParams
@@ -34,7 +38,7 @@ export class Adapter implements AdapterInterface<Connection> {
     this._mysqlParams.createDbOnConnect = params.mysql?.createDbOnConnect ?? true
   }
 
-  async connect(): Promise<Connection> {
+  async connect(): Promise<MySQLAdapterDb> {
     this._connection = await createConnection({
       host: this._mysqlParams.host,
       port: this._mysqlParams.port,
@@ -53,7 +57,7 @@ export class Adapter implements AdapterInterface<Connection> {
     await this.changeToMigrationDatabase()
     await this._connection.query('CREATE TABLE IF NOT EXISTS ' + SqlString.escapeId(this._mysqlParams.migrationTable) + ' (`name` VARCHAR(255) NOT NULL, PRIMARY KEY (`name`))')
 
-    return this._connection
+    return {db: this._connection}
   }
 
   async disconnect(): Promise<void> {
@@ -101,5 +105,6 @@ export class Adapter implements AdapterInterface<Connection> {
     return parseInt(port)
   }
 }
+const _: AdapterConstructor<MySQLAdapterDb> = Adapter
 
 export default Adapter

@@ -1,17 +1,17 @@
 export const tags = []
 
-export const migrate = async (connection) => {
+export const migrate = async (client) => {
   try {
-    // await connection.query("SQL")
+    // await client.db.query("SQL")
   } finally {
-    await connection.end()
+    await client.db.end()
   }
 }
 
-export const rollback = async (connection) => {
+export const rollback = async (client) => {
   try {
-    // await connection.query("SQL")
+    // await client.db.query("SQL")
   } finally {
-    await connection.end()
+    await client.db.end()
   }
 }

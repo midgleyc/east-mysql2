@@ -1,19 +1,19 @@
-import {Connection} from 'mysql2/promise'
+import type {MySQLAdapterDb} from 'east-mysql2'
 
 export const tags = []
 
-export const migrate = async (connection: Connection): Promise<void> => {
+export const migrate = async (client: MySQLAdapterDb): Promise<void> => {
   try {
-    // await connection.query("SQL")
+    // await client.db.query("SQL")
   } finally {
-    await connection.end()
+    await client.end()
   }
 }
 
-export const rollback = async (connection: Connection): Promise<void> => {
+export const rollback = async (client: MySQLAdapterDb): Promise<void> => {
   try {
-    // await connection.query("SQL")
+    // await client.db.query("SQL")
   } finally {
-    await connection.end()
+    await client.end()
   }
 }
