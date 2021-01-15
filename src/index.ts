@@ -101,3 +101,5 @@ export class Adapter implements AdapterInterface<Connection> {
     return parseInt(port)
   }
 }
+
+export default Adapter
