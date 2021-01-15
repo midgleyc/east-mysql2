@@ -1,0 +1,23 @@
+{
+  "parser": "@typescript-eslint/parser",
+  "plugins": [
+    "@typescript-eslint"
+  ],
+  "extends": [
+    "eslint:recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:node/recommended"
+  ],
+  "parserOptions": {
+    "ecmaVersion": 2018
+  },
+  "rules": {
+    "no-empty": ["error", { "allowEmptyCatch": true }],
+    "semi": ["error", "never"],
+    "node/no-unsupported-features/es-syntax": ["error", { "ignores": [ "modules" ] } ],
+    "node/no-missing-import": ["error", { "tryExtensions": [".js", ".ts", ".d.ts"] }],
+    "@typescript-eslint/no-unused-vars": ["error", { "argsIgnorePattern": "^_", "varsIgnorePattern": "^_" }],
+    "@typescript-eslint/no-explicit-any": ["off"],
+    "@typescript-eslint/no-non-null-assertion": ["off"]
+  }
+}

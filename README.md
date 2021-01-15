@@ -1,6 +1,8 @@
 # east mysql2
 
-MySQL adapter for [east](https://github.com/okv/east) which uses the [node-mysql2](https://github.com/sidorares/node-mysql2) driver.
+MySQL adapter for [east](https://github.com/okv/east) which uses the Promisified [mysql2](https://github.com/sidorares/node-mysql2) driver.
+
+Requires Node 10+.
 
 All executed migrations names will by default be stored in a `_migrations` collection in the `_migrations` database.
 
@@ -16,7 +18,7 @@ or in `.eastrc`:
 {
     "mysql": {
         "host": "<host>",
-        "port": "<port>"
+        "port": <port>, // note the lack of quotes!
         "user": "<user>",
         "password": "<password>",
     }
@@ -29,7 +31,7 @@ You can also configure the database and table migration information is stored in
 ```json
 {
     "mysql": {
-        "migrationDatabase": "<database>"
+        "migrationDatabase": "<database>",
         "migrationTable": "<table>"
     }
 }
