@@ -13,15 +13,15 @@ export interface MySQLParams {
   createDbOnConnect?: boolean
 }
 
-export interface Params extends AdapterConstructorParams<MySQLAdapterDb> {
+export interface Params extends AdapterConstructorParams<MySQLClient> {
   mysql?: MySQLParams
 }
 
-export interface MySQLAdapterDb {
+export interface MySQLClient {
   db: Connection
 }
 
-export class Adapter implements AdapterInterface<MySQLAdapterDb> {
+export class Adapter implements AdapterInterface<MySQLClient> {
   _connection?: Connection
   _params: Params
   _mysqlParams: MySQLParams
@@ -38,7 +38,7 @@ export class Adapter implements AdapterInterface<MySQLAdapterDb> {
     this._mysqlParams.createDbOnConnect = params.mysql?.createDbOnConnect ?? true
   }
 
-  async connect(): Promise<MySQLAdapterDb> {
+  async connect(): Promise<MySQLClient> {
     this._connection = await createConnection({
       host: this._mysqlParams.host,
       port: this._mysqlParams.port,
@@ -105,6 +105,6 @@ export class Adapter implements AdapterInterface<MySQLAdapterDb> {
     return parseInt(port)
   }
 }
-const _: AdapterConstructor<MySQLAdapterDb> = Adapter
+const _: AdapterConstructor<MySQLClient> = Adapter
 
 export default Adapter

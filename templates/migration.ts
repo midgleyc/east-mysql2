@@ -1,11 +1,11 @@
-import type {MySQLAdapterDb} from 'east-mysql2'
+import type {MySQLClient} from 'east-mysql2'
 
 export const tags = []
 
-export const migrate = async (client: MySQLAdapterDb): Promise<void> => {
+export const migrate = async (client: MySQLClient): Promise<void> => {
   // await client.db.query("SQL")
 }
 
-export const rollback = async (client: MySQLAdapterDb): Promise<void> => {
+export const rollback = async (client: MySQLClient): Promise<void> => {
   // await client.db.query("SQL")
 }
