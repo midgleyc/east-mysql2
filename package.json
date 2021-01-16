@@ -1,6 +1,6 @@
 {
   "name": "east-mysql2",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "mysql2 adapter for east",
   "repository": "github:midgleyc/east-mysql2",
   "main": "dist/index.js",
