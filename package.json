@@ -15,7 +15,7 @@
   "scripts": {
     "build": "npx tsc",
     "test": "npx tap",
-    "lint": "npx eslint ."
+    "lint": "npx eslint"
   },
   "keywords": [
     "database",
