@@ -1,9 +1,9 @@
-export const tags = []
+exports.tags = [];
 
-export const migrate = async (client) => {
-  // await client.db.query("SQL")
-}
+exports.migrate = async (client) => {
+    // await client.db.query("SQL")
+};
 
-export const rollback = async (client) => {
-  // await client.db.query("SQL")
-}
+exports.rollback = async (client) => {
+    // await client.db.query("SQL")
+};
