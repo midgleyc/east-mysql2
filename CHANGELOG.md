@@ -1,3 +1,8 @@
+# 1.0.3
+
+## Bug Fixes
+* Don't check params.template in getTemplatePath -- it should already have been checked upstream
+
 # 1.0.2
 
 ## Bug Fixes
