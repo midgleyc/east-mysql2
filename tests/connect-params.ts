@@ -1,13 +1,13 @@
 import tap from 'tap'
 import proxyquire from 'proxyquire'
 import sinon from 'sinon'
-import {Params} from '../src'
+import {Adapter as AdapterClass, Params} from '../src'
 import {makeConnection} from './helpers'
 import mysql from 'mysql2/promise'
 
 const mysqlStub: Partial<typeof mysql> = {}
 
-const Adapter = proxyquire('../src', {'mysql2/promise': mysqlStub}).Adapter
+const Adapter: typeof AdapterClass = proxyquire('../src', {'mysql2/promise': mysqlStub}).Adapter
 
 tap.test('default to undefined if nothing set', async t => {
   const createConnection = sinon.stub().resolves(makeConnection())
