@@ -23,11 +23,10 @@ export interface MySQLClient {
 
 export class Adapter implements AdapterInterface<MySQLClient> {
   _connection?: Connection
-  _params: Params
   _mysqlParams: MySQLParams
 
   constructor(params: Params) {
-    this._params = params = params || {}
+    params = params || {}
     this._mysqlParams = {}
     this._mysqlParams.host = params.mysql?.host ?? process.env.MYSQL_HOST
     this._mysqlParams.port = params.mysql?.port ?? this.toNumber(process.env.MYSQL_PORT)
@@ -65,9 +64,7 @@ export class Adapter implements AdapterInterface<MySQLClient> {
   }
 
   getTemplatePath(sourceMigrationExtension: string): string {
-    if (this._params.template) {
-      return path.resolve(path.normalize(this._params.template))
-    } else if (['js', 'ts'].includes(sourceMigrationExtension)) {
+    if (['js', 'ts'].includes(sourceMigrationExtension)) {
       return path.resolve(__dirname, `../templates/migration.${sourceMigrationExtension}`)
     }
     throw new Error(`Adapter doesn't provide template ".${sourceMigrationExtension}" source files, please specify template in configuration`)

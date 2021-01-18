@@ -2,11 +2,6 @@ import path from 'path'
 import tap from 'tap'
 import {Adapter, Params} from '../src/index'
 
-tap.test('resolves template if provided', async t => {
-  const adapter = new Adapter({template: './template.js'} as Params)
-  t.equal(adapter.getTemplatePath('js'), path.resolve('./template.js'))
-})
-
 tap.test('resolves provided template if valid extension', async t => {
   const adapter = new Adapter({} as Params)
   t.equal(adapter.getTemplatePath('js'), path.resolve(__dirname, '../templates/migration.js'))
