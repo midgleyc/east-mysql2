@@ -31,5 +31,5 @@ tap.test('non-default table name', async t => {
 
 tap.test('with no connection, errors', async t => {
   const adapter = new Adapter({} as Params)
-  return t.rejects(async () => await adapter.unmarkExecuted('test'))
+  await t.rejects(async () => await adapter.unmarkExecuted('test'))
 })

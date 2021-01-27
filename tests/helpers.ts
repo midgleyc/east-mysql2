@@ -8,5 +8,5 @@ export function makeConnection(changes?: Partial<Connection>): Connection {
     execute: async () => [[]],
   }
   const connection = {...defaults, ...changes}
-  return connection as unknown as Connection
+  return connection as Connection
 }

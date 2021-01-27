@@ -15,5 +15,5 @@ tap.test('disconnects', async t => {
 
 tap.test('with no connection, does not error', async t => {
   const adapter = new Adapter({} as Params)
-  return t.resolves(async () => await adapter.disconnect())
+  await t.resolves(async () => await adapter.disconnect())
 })
