@@ -14,7 +14,7 @@
   ],
   "scripts": {
     "build": "npx tsc",
-    "test": "npx tap",
+    "test": "npx tap --ts --node-arg='-r' --node-arg='ts-node/register/transpile-only'",
     "lint": "npx eslint"
   },
   "keywords": [
@@ -40,7 +40,8 @@
     "eslint-plugin-node": "^11.1.0",
     "proxyquire": "^2.1.3",
     "sinon": "^10.0.0",
-    "tap": "^14.11.0",
+    "tap": "^15.0.1",
+    "ts-node": "^9.1.1",
     "typescript": "^4.2.3"
   },
   "dependencies": {
