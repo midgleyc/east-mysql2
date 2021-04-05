@@ -10,10 +10,10 @@ tap.test('default table name', async t => {
     execute: execute
   })
   await adapter.unmarkExecuted('1-migration_1')
-  t.assert(execute.calledOnce)
+  t.ok(execute.calledOnce)
   const call = execute.firstCall
   t.equal(call.args[0], 'DELETE FROM `_migrations` WHERE name = ?')
-  t.deepEqual(call.args[1], ['1-migration_1'])
+  t.same(call.args[1], ['1-migration_1'])
 })
 
 tap.test('non-default table name', async t => {
@@ -23,10 +23,10 @@ tap.test('non-default table name', async t => {
     execute: execute
   })
   await adapter.unmarkExecuted('2-migration_2')
-  t.assert(execute.calledOnce)
+  t.ok(execute.calledOnce)
   const call = execute.firstCall
   t.equal(call.args[0], 'DELETE FROM `my-migration-table` WHERE name = ?')
-  t.deepEqual(call.args[1], ['2-migration_2'])
+  t.same(call.args[1], ['2-migration_2'])
 })
 
 tap.test('with no connection, errors', async t => {

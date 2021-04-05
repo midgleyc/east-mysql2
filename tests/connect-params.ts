@@ -14,9 +14,9 @@ tap.test('default to undefined if nothing set', async t => {
   mysqlStub.createConnection = createConnection
   const adapter = new Adapter(null as unknown as Params)
   await adapter.connect()
-  t.assert(createConnection.calledOnce)
+  t.ok(createConnection.calledOnce)
   const call = createConnection.firstCall
-  t.deepEqual(call.args[0], {host: undefined, port: undefined, user: undefined, password: undefined})
+  t.same(call.args[0], {host: undefined, port: undefined, user: undefined, password: undefined})
 })
 
 tap.test('use JSON configuration if present', async t => {
@@ -25,9 +25,9 @@ tap.test('use JSON configuration if present', async t => {
   mysqlStub.createConnection = createConnection
   const adapter = new Adapter({mysql: {host: 'myhost', port: 1000, user: 'mrs bloggs', password: ''}} as Params)
   await adapter.connect()
-  t.assert(createConnection.calledOnce)
+  t.ok(createConnection.calledOnce)
   const call = createConnection.firstCall
-  t.deepEqual(call.args[0], {host: 'myhost', port: 1000, user: 'mrs bloggs', password: ''})
+  t.same(call.args[0], {host: 'myhost', port: 1000, user: 'mrs bloggs', password: ''})
   reset()
 })
 
@@ -37,9 +37,9 @@ tap.test('use ENV configuration if JSON not present', async t => {
   mysqlStub.createConnection = createConnection
   const adapter = new Adapter({} as Params)
   await adapter.connect()
-  t.assert(createConnection.calledOnce)
+  t.ok(createConnection.calledOnce)
   const call = createConnection.firstCall
-  t.deepEqual(call.args[0], {host: 'some_host', port: 1337, user: 'my_user', password: 'a_password'})
+  t.same(call.args[0], {host: 'some_host', port: 1337, user: 'my_user', password: 'a_password'})
   reset()
 })
 
@@ -48,7 +48,7 @@ tap.test('create migration database by default', async t => {
   mysqlStub.createConnection = sinon.stub().resolves(makeConnection({query}))
   const adapter = new Adapter({} as Params)
   await adapter.connect()
-  t.assert(query.firstCall.calledWith('CREATE DATABASE `_migrations`'))
+  t.ok(query.firstCall.calledWith('CREATE DATABASE `_migrations`'))
 })
 
 tap.test('create configured migration database if present', async t => {
@@ -56,7 +56,7 @@ tap.test('create configured migration database if present', async t => {
   mysqlStub.createConnection = sinon.stub().resolves(makeConnection({query}))
   const adapter = new Adapter({mysql:{migrationDatabase: 'migration`-database'}} as Params)
   await adapter.connect()
-  t.assert(query.firstCall.calledWith('CREATE DATABASE `migration``-database`'))
+  t.ok(query.firstCall.calledWith('CREATE DATABASE `migration``-database`'))
 })
 
 tap.test('does not create migration database if so configured', async t => {
@@ -64,7 +64,7 @@ tap.test('does not create migration database if so configured', async t => {
   mysqlStub.createConnection = sinon.stub().resolves(makeConnection({query}))
   const adapter = new Adapter({mysql:{createDbOnConnect: false, migrationTable: 'main'}} as Params)
   await adapter.connect()
-  t.assert(query.firstCall.calledWith('CREATE TABLE IF NOT EXISTS `main` (`name` VARCHAR(255) NOT NULL, PRIMARY KEY (`name`))'))
+  t.ok(query.firstCall.calledWith('CREATE TABLE IF NOT EXISTS `main` (`name` VARCHAR(255) NOT NULL, PRIMARY KEY (`name`))'))
 })
 
 tap.test('does not try to create migration database if it exists', async t => {
@@ -73,7 +73,7 @@ tap.test('does not try to create migration database if it exists', async t => {
   mysqlStub.createConnection = sinon.stub().resolves(makeConnection({query, execute}))
   const adapter = new Adapter({} as Params)
   await adapter.connect()
-  t.assert(query.calledOnce)
+  t.ok(query.calledOnce)
   const callArg = query.firstCall.args
   t.notMatch(callArg[0], /^CREATE DATABASE/)
 })

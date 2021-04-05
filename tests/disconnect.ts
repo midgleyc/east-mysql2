@@ -10,7 +10,7 @@ tap.test('disconnects', async t => {
     end: end
   })
   await adapter.disconnect()
-  t.assert(end.calledOnce)
+  t.ok(end.calledOnce)
 })
 
 tap.test('with no connection, does not error', async t => {

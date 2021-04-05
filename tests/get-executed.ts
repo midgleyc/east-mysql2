@@ -6,7 +6,7 @@ import {makeConnection} from './helpers'
 tap.test('no connection created', async t => {
   const adapter = new Adapter({} as Params)
   const executed = await adapter.getExecutedMigrationNames()
-  t.deepEqual(executed, [])
+  t.same(executed, [])
 })
 
 tap.test('default table name', async t => {
@@ -16,7 +16,7 @@ tap.test('default table name', async t => {
     query: query
   })
   await adapter.getExecutedMigrationNames()
-  t.assert(query.calledOnce)
+  t.ok(query.calledOnce)
   const call = query.firstCall
   t.equal(call.args[0], 'SELECT name FROM `_migrations`')
 })
@@ -28,7 +28,7 @@ tap.test('non-default table name', async t => {
     query: query
   })
   await adapter.getExecutedMigrationNames()
-  t.assert(query.calledOnce)
+  t.ok(query.calledOnce)
   const call = query.firstCall
   t.equal(call.args[0], 'SELECT name FROM `my-migration-table`')
 })
@@ -40,7 +40,7 @@ tap.test('no results', async t => {
     query: query
   })
   const executed = await adapter.getExecutedMigrationNames()
-  t.deepEqual(executed, [])
+  t.same(executed, [])
 })
 
 tap.test('many results', async t => {
@@ -50,5 +50,5 @@ tap.test('many results', async t => {
     query: query
   })
   const executed = await adapter.getExecutedMigrationNames()
-  t.deepEqual(executed, ['1-migration_1', '2-migration_2', '3-some-other-migration'])
+  t.same(executed, ['1-migration_1', '2-migration_2', '3-some-other-migration'])
 })
