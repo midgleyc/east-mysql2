@@ -28,7 +28,7 @@
   "author": "Chris Midgley <chris.midgley@dunecomputers.co.uk>",
   "license": "MIT",
   "devDependencies": {
-    "@tsconfig/node10": "1.0.7",
+    "@tsconfig/node10": "1.0.8",
     "@types/node": "15.12.1",
     "@types/proxyquire": "1.3.28",
     "@types/sinon": "10.0.2",
