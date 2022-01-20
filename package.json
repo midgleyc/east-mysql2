@@ -42,7 +42,7 @@
     "sinon": "12.0.1",
     "tap": "15.1.6",
     "ts-node": "10.4.0",
-    "typescript": "4.5.4"
+    "typescript": "4.5.5"
   },
   "dependencies": {
     "east": "^2.0.2",
