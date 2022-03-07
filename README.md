@@ -2,7 +2,7 @@
 
 MySQL adapter for [east](https://github.com/okv/east) which uses the Promisified [mysql2](https://github.com/sidorares/node-mysql2) driver.
 
-Requires Node 10+.
+Requires Node 16+ for v2, Node 10+ for v1.
 
 All executed migrations names will by default be stored in a `_migrations` collection in the `_migrations` database.
 
